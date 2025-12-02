@@ -46,6 +46,12 @@ packages/
 .nuget/
 *.snupkg
 
+# Mobile App
+mobile-app/CreditTracker/node_modules/
+mobile-app/CreditTracker/android/build/
+mobile-app/CreditTracker/ios/build/
+mobile-app/CreditTracker/ios/Pods/
+
 # Others
 _ReSharper*/
 *.vs/
