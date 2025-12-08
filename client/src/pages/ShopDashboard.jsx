@@ -146,6 +146,7 @@ const ShopDashboard = () => {
   };
 
   const handleDelete = async (entryId) => {
+    // TODO: Consider replacing with Chakra UI AlertDialog for better UX
     if (!window.confirm('Are you sure you want to delete this entry?')) return;
 
     try {

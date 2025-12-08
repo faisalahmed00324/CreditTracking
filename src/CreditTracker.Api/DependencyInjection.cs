@@ -103,15 +103,16 @@ namespace CreditTracker.Api
         {
             app.MapCarter();
 
-            // Enable CORS
-            app.UseCors("AllowReactApp");
-
             app.UseExceptionHandler(options => { });
             app.UseHealthChecks("/health",
                 new HealthCheckOptions
                 {
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
                 });
+            
+            // Enable CORS before authentication
+            app.UseCors("AllowReactApp");
+            
             app.UseSwagger();
             app.UseSwaggerUI();
             app.UseAuthentication();

@@ -31,7 +31,8 @@ apiClient.interceptors.response.use(
       // Token expired or invalid
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.location.href = '/login';
+      // Let the component handle navigation instead of forcing a redirect
+      // This preserves React Router's functionality
     }
     return Promise.reject(error);
   }

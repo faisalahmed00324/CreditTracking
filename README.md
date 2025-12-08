@@ -31,7 +31,29 @@ CreditTracker is a full-stack application for tracking credit entries between sh
 ### Prerequisites
 - .NET 9.0 SDK
 - Node.js 18+ and npm
-- MongoDB running locally (`mongodb://localhost:27017`)
+- Docker and Docker Compose (recommended for MongoDB)
+  - OR MongoDB running locally (`mongodb://localhost:27017`)
+
+### Quick Start with Docker Compose
+
+1. **Start MongoDB**
+   ```sh
+   docker-compose up -d
+   ```
+
+2. **Start the Backend API**
+   ```sh
+   dotnet run --project src/CreditTracker.Api/CreditTracker.Api.csproj
+   ```
+   API will be available at `http://localhost:5000`
+
+3. **Start the Frontend**
+   ```sh
+   cd client
+   npm install
+   npm run dev
+   ```
+   Frontend will be available at `http://localhost:5173`
 
 ### Backend Setup
 
