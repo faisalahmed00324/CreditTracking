@@ -26,6 +26,18 @@ namespace CreditTracker.Api
             services.AddHealthChecks()
                 .AddMongoDb();
           
+            // Add CORS policy
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowReactApp", policy =>
+                {
+                    policy.WithOrigins("http://localhost:5173", "http://localhost:3000")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowCredentials();
+                });
+            });
+
             services.AddEndpointsApiExplorer();
             var jwtSettings = configuration.GetSection("JwtSettings");
             var key = Encoding.UTF8.GetBytes(jwtSettings["Secret"]);
@@ -97,6 +109,10 @@ namespace CreditTracker.Api
                 {
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
                 });
+            
+            // Enable CORS before authentication
+            app.UseCors("AllowReactApp");
+            
             app.UseSwagger();
             app.UseSwaggerUI();
             app.UseAuthentication();
