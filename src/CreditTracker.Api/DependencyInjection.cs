@@ -26,6 +26,22 @@ namespace CreditTracker.Api
             services.AddHealthChecks()
                 .AddMongoDb();
           
+            // Add CORS configuration
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFrontend", policy =>
+                {
+                    policy.WithOrigins(
+                        "http://localhost:5173",  // Vite dev server
+                        "http://localhost:3000",  // Alternative React dev port
+                        "http://localhost:4173"   // Vite preview port
+                    )
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+                });
+            });
+
             services.AddEndpointsApiExplorer();
             var jwtSettings = configuration.GetSection("JwtSettings");
             var key = Encoding.UTF8.GetBytes(jwtSettings["Secret"]);
@@ -90,6 +106,9 @@ namespace CreditTracker.Api
         public static WebApplication UseApiServices(this WebApplication app)
         {
             app.MapCarter();
+
+            // Use CORS before other middleware
+            app.UseCors("AllowFrontend");
 
             app.UseExceptionHandler(options => { });
             app.UseHealthChecks("/health",
