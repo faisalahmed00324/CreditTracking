@@ -18,6 +18,10 @@ CreditTracker is a .NET 9.0 solution for tracking credit entries between shops a
 - `src/CreditTracker.Domain`: Domain models and abstractions
 - `src/CreditTracker.Infrastructure`: MongoDB repositories and mappings
 - `src/BuildingBlocks/BuildingBlocks`: Shared utilities, CQRS, exception handling
+- `tests/`: Unit test projects
+  - `tests/BuildingBlocks.Tests`: Tests for shared utilities
+  - `tests/CreditTracker.Domain.Tests`: Tests for domain models
+  - `tests/CreditTracker.Application.Tests`: Tests for application handlers and validators
 
 ## Getting Started
 
@@ -34,8 +38,28 @@ CreditTracker is a .NET 9.0 solution for tracking credit entries between shops a
    dotnet run --project src/CreditTracker.Api/CreditTracker.Api.csproj
    ```
 
-4. **API Documentation**
+4. **Run Tests**
+   ```sh
+   dotnet test CreditTracker.sln
+   ```
+
+5. **API Documentation**
    - Swagger UI available at `/swagger` when running the API.
+
+## Testing
+
+The project includes comprehensive unit tests covering:
+
+- **BuildingBlocks**: PasswordHasher utility functions (10 tests)
+- **Domain Models**: User and CreditEntry entities with business logic (16 tests)
+- **Application Layer**: Command handlers, query handlers, and validators (30 tests)
+
+**Total: 56 unit tests, 100% passing**
+
+Test frameworks used:
+- xUnit for test runner
+- Moq for mocking dependencies
+- FluentAssertions for readable assertions
 
 ## Usage
 
