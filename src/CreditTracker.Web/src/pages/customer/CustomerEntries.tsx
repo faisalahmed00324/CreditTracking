@@ -26,15 +26,24 @@ export function CustomerEntries() {
 
   useEffect(() => {
     if (!user?.id) return;
-    setLoading(true);
-    getCreditEntriesByCustomerApi(user.id, pageIndex, pageSize)
-      .then((res) => {
-        const data = res.data?.creditEntries;
-        setEntries(data?.data || []);
-        setTotal(data?.count || 0);
-      })
-      .finally(() => setLoading(false));
-  }, [pageIndex, user?.id]);
+    let cancelled = false;
+    async function load() {
+      setLoading(true);
+      try {
+        const res = await getCreditEntriesByCustomerApi(user!.id, pageIndex, pageSize);
+        if (!cancelled) {
+          const data = res.data?.creditEntries;
+          setEntries(data?.data || []);
+          setTotal(data?.count || 0);
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+    void load();
+    return () => { cancelled = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageIndex, pageSize, user?.id]);
 
   const filtered = entries.filter((e) => {
     const matchSearch = !search ||

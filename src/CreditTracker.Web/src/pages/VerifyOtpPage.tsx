@@ -44,10 +44,10 @@ export function VerifyOtpPage() {
           isClosable: true,
         });
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       toast({
         title: 'Error',
-        description: err.response?.data?.detail || 'Verification failed',
+        description: (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail || 'Verification failed',
         status: 'error',
         duration: 4000,
         isClosable: true,

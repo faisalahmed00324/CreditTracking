@@ -43,7 +43,7 @@ export function ShopEntries() {
     }
   }
 
-  useEffect(() => { loadEntries(pageIndex); }, [pageIndex, user?.id]);
+  useEffect(() => { loadEntries(pageIndex); }, [pageIndex, user?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function handleDelete(id: string) {
     if (!window.confirm('Delete this entry?')) return;

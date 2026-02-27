@@ -81,10 +81,10 @@ export function CreateCreditEntry() {
         isClosable: true,
       });
       navigate('/shop/entries');
-    } catch (err: any) {
+    } catch (err: unknown) {
       toast({
         title: 'Failed',
-        description: err.response?.data?.detail || 'Could not create entry',
+        description: (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail || 'Could not create entry',
         status: 'error',
         duration: 4000,
         isClosable: true,

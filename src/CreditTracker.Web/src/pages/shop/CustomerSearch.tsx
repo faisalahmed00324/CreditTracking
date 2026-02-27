@@ -24,10 +24,10 @@ export function CustomerSearch() {
     try {
       const res = await searchCustomersApi(searchText);
       setCustomers(Array.isArray(res.data) ? res.data : []);
-    } catch (err: any) {
+    } catch (err: unknown) {
       toast({
         title: 'Search failed',
-        description: err.response?.data?.detail || 'Error searching',
+        description: (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail || 'Error searching',
         status: 'error',
         duration: 3000,
         isClosable: true,

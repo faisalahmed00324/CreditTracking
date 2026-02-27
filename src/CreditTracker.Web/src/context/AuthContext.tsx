@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import { createContext, useContext, useState, useMemo, type ReactNode } from 'react';
 import { jwtDecode } from 'jwt-decode';
 
 interface JwtPayload {
@@ -24,27 +24,20 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+function parseToken(t: string): AuthUser | null {
+  try {
+    const decoded = jwtDecode<JwtPayload>(t);
+    const role = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] as 'Shop' | 'Customer';
+    return { id: decoded.sub, role };
+  } catch {
+    return null;
+  }
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string | null>(() => localStorage.getItem('token'));
-  const [user, setUser] = useState<AuthUser | null>(null);
 
-  function parseToken(t: string): AuthUser | null {
-    try {
-      const decoded = jwtDecode<JwtPayload>(t);
-      const role = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] as 'Shop' | 'Customer';
-      return { id: decoded.sub, role };
-    } catch {
-      return null;
-    }
-  }
-
-  useEffect(() => {
-    if (token) {
-      setUser(parseToken(token));
-    } else {
-      setUser(null);
-    }
-  }, [token]);
+  const user = useMemo(() => (token ? parseToken(token) : null), [token]);
 
   function login(newToken: string) {
     localStorage.setItem('token', newToken);
@@ -73,6 +66,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   const ctx = useContext(AuthContext);
   if (!ctx) throw new Error('useAuth must be used within AuthProvider');

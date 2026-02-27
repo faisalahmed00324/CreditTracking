@@ -28,7 +28,7 @@ export function LoginPage() {
     setLoading(true);
     try {
       const res = await loginApi(data.userName, data.password);
-      const token = typeof res.data === 'string' ? res.data : (res.data as any)?.token || res.data;
+      const token = typeof res.data === 'string' ? res.data : String(res.data);
       login(token);
       // Determine role from token
       try {
@@ -38,10 +38,11 @@ export function LoginPage() {
       } catch {
         navigate('/shop/dashboard');
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const message = (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail || 'Invalid credentials';
       toast({
         title: 'Login failed',
-        description: err.response?.data?.detail || 'Invalid credentials',
+        description: message,
         status: 'error',
         duration: 4000,
         isClosable: true,

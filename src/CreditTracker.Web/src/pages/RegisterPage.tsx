@@ -47,10 +47,10 @@ export function RegisterPage() {
         isClosable: true,
       });
       navigate('/verify-otp');
-    } catch (err: any) {
+    } catch (err: unknown) {
       toast({
         title: 'Registration failed',
-        description: err.response?.data?.detail || 'An error occurred',
+        description: (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail || 'An error occurred',
         status: 'error',
         duration: 4000,
         isClosable: true,

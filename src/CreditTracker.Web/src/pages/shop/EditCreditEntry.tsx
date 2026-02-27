@@ -39,7 +39,7 @@ export function EditCreditEntry() {
         }
       })
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function onSubmit(data: EditForm) {
     if (!id) return;
