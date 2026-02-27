@@ -114,7 +114,7 @@ export function CreateCreditEntry() {
                     onChange={(e) => setSearchText(e.target.value)}
                     placeholder="Search customer by name..."
                     bg={colors.inputBg}
-                    onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleSearch())}
+                    onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleSearch(); } }}
                   />
                   <Button
                     leftIcon={<SearchIcon />}
