@@ -26,7 +26,7 @@ export function CustomerDashboard() {
           getCurrentUserApi(),
         ]);
         setEntries(entriesRes.data?.creditEntries?.data || []);
-        setCustomerName(userRes.data?.name || '');
+        setCustomerName(userRes.data?.user?.name || '');
       } catch {
         setEntries([]);
       } finally {

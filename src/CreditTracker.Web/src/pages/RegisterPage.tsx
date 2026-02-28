@@ -1,7 +1,7 @@
 import {
   Box, Button, Card, CardBody, FormControl, FormErrorMessage, FormLabel,
   Heading, Input, Stack, Text, Link, useToast, VStack, HStack, Icon,
-  Select, SimpleGrid, Textarea
+  SimpleGrid, Textarea, Alert, AlertIcon
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
@@ -16,7 +16,6 @@ interface RegisterForm {
   password: string;
   name: string;
   iCNoOrPassport: string;
-  role: string;
   email: string;
   address: string;
   latitude: string;
@@ -33,9 +32,9 @@ export function RegisterPage() {
   async function onSubmit(data: RegisterForm) {
     setLoading(true);
     try {
-      await createUserApi({
+      const res = await createUserApi({
         ...data,
-        role: parseInt(data.role),
+        role: 2, // Customer only — shops are created by admin
         latitude: data.latitude || '0',
         longitude: data.longitude || '0',
       });
@@ -46,7 +45,7 @@ export function RegisterPage() {
         duration: 4000,
         isClosable: true,
       });
-      navigate('/verify-otp');
+      navigate('/verify-otp', { state: { userId: res.data?.id } });
     } catch (err: unknown) {
       toast({
         title: 'Registration failed',
@@ -72,12 +71,17 @@ export function RegisterPage() {
               <VStack spacing={2}>
                 <Icon as={MdCreditCard} boxSize={10} color={colors.brandPrimary} />
                 <Heading size="lg" textAlign="center" color={colors.textPrimary}>
-                  Create Account
+                  Customer Registration
                 </Heading>
                 <Text color={colors.textSecondary} fontSize="sm" textAlign="center">
-                  Register as a Shop or Customer
+                  Create your customer account
                 </Text>
               </VStack>
+
+              <Alert status="info" borderRadius="md" fontSize="sm">
+                <AlertIcon />
+                This registration is for <strong>customers</strong> only. Shop accounts are created by admin.
+              </Alert>
 
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Stack spacing={4}>
@@ -132,19 +136,6 @@ export function RegisterPage() {
                         bg={colors.inputBg}
                       />
                       <FormErrorMessage>{errors.iCNoOrPassport?.message}</FormErrorMessage>
-                    </FormControl>
-
-                    <FormControl isInvalid={!!errors.role}>
-                      <FormLabel color={colors.textPrimary}>Account Type</FormLabel>
-                      <Select
-                        {...register('role', { required: 'Required' })}
-                        bg={colors.inputBg}
-                      >
-                        <option value="">Select type</option>
-                        <option value="1">Shop</option>
-                        <option value="2">Customer</option>
-                      </Select>
-                      <FormErrorMessage>{errors.role?.message}</FormErrorMessage>
                     </FormControl>
                   </SimpleGrid>
 

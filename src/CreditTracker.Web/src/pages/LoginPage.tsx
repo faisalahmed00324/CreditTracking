@@ -28,7 +28,8 @@ export function LoginPage() {
     setLoading(true);
     try {
       const res = await loginApi(data.userName, data.password);
-      const token = typeof res.data === 'string' ? res.data : String(res.data);
+      const token = res.data?.token;
+      if (!token) throw new Error('No token received');
       login(token);
       // Determine role from token
       try {
@@ -36,7 +37,7 @@ export function LoginPage() {
         const role = payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
         navigate(role === 'Shop' ? '/shop/dashboard' : '/customer/dashboard');
       } catch {
-        navigate('/shop/dashboard');
+        navigate('/customer/dashboard');
       }
     } catch (err: unknown) {
       const message = (err as { response?: { data?: { detail?: string } } })?.response?.data?.detail || 'Invalid credentials';

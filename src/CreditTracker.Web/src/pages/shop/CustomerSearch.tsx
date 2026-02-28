@@ -23,7 +23,7 @@ export function CustomerSearch() {
     setSearched(true);
     try {
       const res = await searchCustomersApi(searchText);
-      setCustomers(Array.isArray(res.data) ? res.data : []);
+      setCustomers(res.data?.users || []);
     } catch (err: unknown) {
       toast({
         title: 'Search failed',

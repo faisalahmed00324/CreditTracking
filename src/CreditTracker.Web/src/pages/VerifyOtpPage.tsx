@@ -3,7 +3,7 @@ import {
   Heading, Input, Stack, Text, VStack, HStack, Icon, useToast
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { verifyOtpApi } from '../lib/api';
 import { ThemeToggle } from '../components/ThemeToggle';
@@ -16,7 +16,11 @@ interface VerifyForm {
 }
 
 export function VerifyOtpPage() {
-  const { register, handleSubmit, formState: { errors } } = useForm<VerifyForm>();
+  const location = useLocation();
+  const prefillId = (location.state as { userId?: string } | null)?.userId || '';
+  const { register, handleSubmit, formState: { errors } } = useForm<VerifyForm>({
+    defaultValues: { id: prefillId },
+  });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
@@ -82,8 +86,9 @@ export function VerifyOtpPage() {
                     <FormLabel color={colors.textPrimary}>User ID</FormLabel>
                     <Input
                       {...register('id', { required: 'User ID is required' })}
-                      placeholder="Your user ID"
+                      placeholder="Your user ID (from registration)"
                       bg={colors.inputBg}
+                      isReadOnly={!!prefillId}
                     />
                     <FormErrorMessage>{errors.id?.message}</FormErrorMessage>
                   </FormControl>

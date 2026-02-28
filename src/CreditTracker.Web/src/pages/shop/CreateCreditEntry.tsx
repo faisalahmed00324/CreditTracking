@@ -45,7 +45,7 @@ export function CreateCreditEntry() {
     setSearching(true);
     try {
       const res = await searchCustomersApi(searchText);
-      setCustomers(Array.isArray(res.data) ? res.data : []);
+      setCustomers(res.data?.users || []);
     } catch {
       setCustomers([]);
     } finally {

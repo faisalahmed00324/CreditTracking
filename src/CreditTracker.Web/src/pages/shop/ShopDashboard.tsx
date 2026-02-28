@@ -26,7 +26,7 @@ export function ShopDashboard() {
           getCurrentUserApi(),
         ]);
         setEntries(entriesRes.data?.creditEntries?.data || []);
-        setShopName(userRes.data?.name || '');
+        setShopName(userRes.data?.user?.name || '');
       } catch {
         setEntries([]);
       } finally {

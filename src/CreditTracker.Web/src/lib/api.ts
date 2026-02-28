@@ -28,7 +28,7 @@ apiClient.interceptors.response.use(
 
 // --- Auth ---
 export const loginApi = (userName: string, password: string) =>
-  apiClient.post<string>('/login', { userName, password });
+  apiClient.post<{ token: string }>('/login', { userName, password });
 
 export const verifyOtpApi = (id: string, otp: string) =>
   apiClient.post<{ isSuccess: boolean }>('/users/verifyotp', { id, otp });
@@ -51,13 +51,13 @@ export const createUserApi = (user: Partial<UserDto>) =>
   apiClient.post<{ id: string }>('/user', { user });
 
 export const getCurrentUserApi = () =>
-  apiClient.get<{ id: string; userName: string; name: string; role: number; email: string; address: string; iCNoOrPassport: string; latitude: string; longitude: string }>('/user/getcurrentuser');
+  apiClient.get<{ user: UserDto }>('/user/getcurrentuser');
 
 export const getUserByIdApi = (id: string) =>
   apiClient.get<{ user: UserDto }>(`/user/${id}`);
 
 export const searchCustomersApi = (searchText: string) =>
-  apiClient.get<UserDto[]>(`/user/${searchText}`);
+  apiClient.get<{ users: UserDto[] }>(`/user/${searchText}`);
 
 // --- Credit Entries ---
 export interface CreditEntryDto {
@@ -95,12 +95,12 @@ export const deleteCreditEntryApi = (id: string) =>
 
 export const getCreditEntriesByCustomerApi = (customerId: string, pageIndex = 0, pageSize = 10) =>
   apiClient.get<{ creditEntries: PaginationResult<CreditEntryDto> }>(
-    `/creditentry/getbycustomerid?CustomerId=${customerId}&pageIndex=${pageIndex}&pageSize=${pageSize}`
+    `/creditentry/getbycustomerid?CustomerId=${customerId}&pageIndex=${pageIndex + 1}&pageSize=${pageSize}`
   );
 
 export const getCreditEntriesByShopApi = (shopId: string, pageIndex = 0, pageSize = 10) =>
   apiClient.get<{ creditEntries: PaginationResult<CreditEntryDto> }>(
-    `/creditentry/getbyshopid?ShopId=${shopId}&pageIndex=${pageIndex}&pageSize=${pageSize}`
+    `/creditentry/getbyshopid?ShopId=${shopId}&pageIndex=${pageIndex + 1}&pageSize=${pageSize}`
   );
 
 export const getCreditEntryApi = (id: string) =>
