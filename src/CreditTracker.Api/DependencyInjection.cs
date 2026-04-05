@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
+using Prometheus;
 using System.Text;
 
 namespace CreditTracker.Api
@@ -101,6 +102,8 @@ namespace CreditTracker.Api
             app.UseSwaggerUI();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseHttpMetrics();
+            app.MapMetrics("/metrics");
             return app;
         }
     }
