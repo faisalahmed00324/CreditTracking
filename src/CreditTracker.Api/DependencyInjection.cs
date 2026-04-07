@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using MongoDB.Driver;
 using System.Text;
 
@@ -27,6 +27,16 @@ namespace CreditTracker.Api
                 .AddMongoDb();
           
             services.AddEndpointsApiExplorer();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowLocalhost", builder =>
+                {
+                    builder
+                        .WithOrigins("http://localhost:3000")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
             var jwtSettings = configuration.GetSection("JwtSettings");
             var key = Encoding.UTF8.GetBytes(jwtSettings["Secret"]);
             services.AddAuthentication("Bearer")    
@@ -56,20 +66,6 @@ namespace CreditTracker.Api
                     Scheme = "Bearer",                  // <<< Keep Bearer here
                     BearerFormat = "JWT"                // <<< Optional but good to add
                 });
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            }
-                        },
-                        Array.Empty<string>()
-                    }
-                });
             });
             services.AddAuthorization(options =>
             {
@@ -97,6 +93,7 @@ namespace CreditTracker.Api
                 {
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
                 });
+            app.UseCors("AllowLocalhost");
             app.UseSwagger();
             app.UseSwaggerUI();
             app.UseAuthentication();

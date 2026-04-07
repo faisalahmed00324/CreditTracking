@@ -1,0 +1,63 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CreditEntriesPage - Visual Regression > renders loading state for customer 1`] = `
+<div>
+  <div
+    class="css-0"
+  >
+    <h2
+      class="chakra-heading css-1dqx0r"
+    >
+      Credit Entries
+    </h2>
+    <div
+      class="css-1nl61b8"
+    >
+      <div
+        class="chakra-spinner css-9vhpy9"
+      >
+        <span
+          class="css-8b45rq"
+        >
+          Loading...
+        </span>
+      </div>
+    </div>
+  </div>
+  <span
+    hidden=""
+    id="__chakra_env"
+  />
+</div>
+`;
+
+exports[`CreditEntriesPage - Visual Regression > renders loading state for shop 1`] = `
+<div>
+  <div
+    class="css-0"
+  >
+    <h2
+      class="chakra-heading css-1dqx0r"
+    >
+      Credit Entries
+    </h2>
+    <div
+      class="css-1nl61b8"
+    >
+      <div
+        class="chakra-spinner css-9vhpy9"
+      >
+        <span
+          class="css-8b45rq"
+        >
+          Loading...
+        </span>
+      </div>
+    </div>
+  </div>
+  <span
+    hidden=""
+    id="__chakra_env"
+  />
+</div>
+`;

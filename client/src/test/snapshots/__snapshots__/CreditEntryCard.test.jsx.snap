@@ -1,0 +1,429 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CreditEntryCard - Visual Regression > renders paid entry as customer 1`] = `
+<div>
+  <div
+    class="chakra-card css-elh93y"
+  >
+    <div
+      class="chakra-card__header css-1a6ks4y"
+    >
+      <div
+        class="chakra-stack css-hwz0ls"
+      >
+        <div
+          class="chakra-stack css-cgi92c"
+        >
+          <h2
+            class="chakra-heading css-9f6g39"
+          >
+            Widget Pro
+          </h2>
+          <p
+            class="chakra-text css-1xa8ojw"
+          >
+            Shop: ABC Shop
+          </p>
+        </div>
+        <span
+          class="chakra-badge css-1yyvvmm"
+        >
+          Paid
+        </span>
+      </div>
+    </div>
+    <hr
+      aria-orientation="horizontal"
+      class="chakra-divider css-svjswr"
+    />
+    <div
+      class="chakra-card__body css-1xqxuuu"
+    >
+      <div
+        class="chakra-stack css-wpcv6r"
+      >
+        <div
+          class="chakra-stack css-1y3f6ad"
+        >
+          <p
+            class="chakra-text css-89mcmc"
+          >
+            Amount
+          </p>
+          <p
+            class="chakra-text css-4iuloz"
+          >
+            RM 150.50
+          </p>
+        </div>
+        <div
+          class="chakra-stack css-1y3f6ad"
+        >
+          <p
+            class="chakra-text css-89mcmc"
+          >
+            Date
+          </p>
+          <p
+            class="chakra-text css-itvw0n"
+          >
+            6/15/2024
+          </p>
+        </div>
+        <div
+          class="chakra-stack css-1y3f6ad"
+        >
+          <p
+            class="chakra-text css-89mcmc"
+          >
+            Payment Date
+          </p>
+          <p
+            class="chakra-text css-1muqmy1"
+          >
+            7/1/2024
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    hidden=""
+    id="__chakra_env"
+  />
+</div>
+`;
+
+exports[`CreditEntryCard - Visual Regression > renders paid entry as shop owner 1`] = `
+<div>
+  <div
+    class="chakra-card css-elh93y"
+  >
+    <div
+      class="chakra-card__header css-1a6ks4y"
+    >
+      <div
+        class="chakra-stack css-hwz0ls"
+      >
+        <div
+          class="chakra-stack css-cgi92c"
+        >
+          <h2
+            class="chakra-heading css-9f6g39"
+          >
+            Widget Pro
+          </h2>
+          <p
+            class="chakra-text css-1xa8ojw"
+          >
+            Customer: John Doe
+          </p>
+        </div>
+        <span
+          class="chakra-badge css-1yyvvmm"
+        >
+          Paid
+        </span>
+      </div>
+    </div>
+    <hr
+      aria-orientation="horizontal"
+      class="chakra-divider css-svjswr"
+    />
+    <div
+      class="chakra-card__body css-1xqxuuu"
+    >
+      <div
+        class="chakra-stack css-wpcv6r"
+      >
+        <div
+          class="chakra-stack css-1y3f6ad"
+        >
+          <p
+            class="chakra-text css-89mcmc"
+          >
+            Amount
+          </p>
+          <p
+            class="chakra-text css-4iuloz"
+          >
+            RM 150.50
+          </p>
+        </div>
+        <div
+          class="chakra-stack css-1y3f6ad"
+        >
+          <p
+            class="chakra-text css-89mcmc"
+          >
+            Date
+          </p>
+          <p
+            class="chakra-text css-itvw0n"
+          >
+            6/15/2024
+          </p>
+        </div>
+        <div
+          class="chakra-stack css-1y3f6ad"
+        >
+          <p
+            class="chakra-text css-89mcmc"
+          >
+            Payment Date
+          </p>
+          <p
+            class="chakra-text css-1muqmy1"
+          >
+            7/1/2024
+          </p>
+        </div>
+        <hr
+          aria-orientation="horizontal"
+          class="chakra-divider css-svjswr"
+        />
+        <div
+          class="chakra-stack css-20gac"
+        >
+          <button
+            aria-label="Delete entry"
+            class="chakra-button css-fdw95r"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="chakra-icon css-onkibi"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <g
+                fill="currentColor"
+              >
+                <path
+                  d="M19.452 7.5H4.547a.5.5 0 00-.5.545l1.287 14.136A2 2 0 007.326 24h9.347a2 2 0 001.992-1.819L19.95 8.045a.5.5 0 00-.129-.382.5.5 0 00-.369-.163zm-9.2 13a.75.75 0 01-1.5 0v-9a.75.75 0 011.5 0zm5 0a.75.75 0 01-1.5 0v-9a.75.75 0 011.5 0zM22 4h-4.75a.25.25 0 01-.25-.25V2.5A2.5 2.5 0 0014.5 0h-5A2.5 2.5 0 007 2.5v1.25a.25.25 0 01-.25.25H2a1 1 0 000 2h20a1 1 0 000-2zM9 3.75V2.5a.5.5 0 01.5-.5h5a.5.5 0 01.5.5v1.25a.25.25 0 01-.25.25h-5.5A.25.25 0 019 3.75z"
+                />
+              </g>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    hidden=""
+    id="__chakra_env"
+  />
+</div>
+`;
+
+exports[`CreditEntryCard - Visual Regression > renders unpaid entry as customer 1`] = `
+<div>
+  <div
+    class="chakra-card css-elh93y"
+  >
+    <div
+      class="chakra-card__header css-1a6ks4y"
+    >
+      <div
+        class="chakra-stack css-hwz0ls"
+      >
+        <div
+          class="chakra-stack css-cgi92c"
+        >
+          <h2
+            class="chakra-heading css-9f6g39"
+          >
+            Widget Pro
+          </h2>
+          <p
+            class="chakra-text css-1xa8ojw"
+          >
+            Shop: ABC Shop
+          </p>
+        </div>
+        <span
+          class="chakra-badge css-11e0we2"
+        >
+          Unpaid
+        </span>
+      </div>
+    </div>
+    <hr
+      aria-orientation="horizontal"
+      class="chakra-divider css-svjswr"
+    />
+    <div
+      class="chakra-card__body css-1xqxuuu"
+    >
+      <div
+        class="chakra-stack css-wpcv6r"
+      >
+        <div
+          class="chakra-stack css-1y3f6ad"
+        >
+          <p
+            class="chakra-text css-89mcmc"
+          >
+            Amount
+          </p>
+          <p
+            class="chakra-text css-4iuloz"
+          >
+            RM 150.50
+          </p>
+        </div>
+        <div
+          class="chakra-stack css-1y3f6ad"
+        >
+          <p
+            class="chakra-text css-89mcmc"
+          >
+            Date
+          </p>
+          <p
+            class="chakra-text css-itvw0n"
+          >
+            6/15/2024
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    hidden=""
+    id="__chakra_env"
+  />
+</div>
+`;
+
+exports[`CreditEntryCard - Visual Regression > renders unpaid entry as shop owner 1`] = `
+<div>
+  <div
+    class="chakra-card css-elh93y"
+  >
+    <div
+      class="chakra-card__header css-1a6ks4y"
+    >
+      <div
+        class="chakra-stack css-hwz0ls"
+      >
+        <div
+          class="chakra-stack css-cgi92c"
+        >
+          <h2
+            class="chakra-heading css-9f6g39"
+          >
+            Widget Pro
+          </h2>
+          <p
+            class="chakra-text css-1xa8ojw"
+          >
+            Customer: John Doe
+          </p>
+        </div>
+        <span
+          class="chakra-badge css-11e0we2"
+        >
+          Unpaid
+        </span>
+      </div>
+    </div>
+    <hr
+      aria-orientation="horizontal"
+      class="chakra-divider css-svjswr"
+    />
+    <div
+      class="chakra-card__body css-1xqxuuu"
+    >
+      <div
+        class="chakra-stack css-wpcv6r"
+      >
+        <div
+          class="chakra-stack css-1y3f6ad"
+        >
+          <p
+            class="chakra-text css-89mcmc"
+          >
+            Amount
+          </p>
+          <p
+            class="chakra-text css-4iuloz"
+          >
+            RM 150.50
+          </p>
+        </div>
+        <div
+          class="chakra-stack css-1y3f6ad"
+        >
+          <p
+            class="chakra-text css-89mcmc"
+          >
+            Date
+          </p>
+          <p
+            class="chakra-text css-itvw0n"
+          >
+            6/15/2024
+          </p>
+        </div>
+        <hr
+          aria-orientation="horizontal"
+          class="chakra-divider css-svjswr"
+        />
+        <div
+          class="chakra-stack css-20gac"
+        >
+          <button
+            aria-label="Mark as paid"
+            class="chakra-button css-1k6i51g"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="chakra-icon css-13otjrl"
+              fill="none"
+              focusable="false"
+              height="1em"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"
+              />
+            </svg>
+          </button>
+          <button
+            aria-label="Delete entry"
+            class="chakra-button css-fdw95r"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="chakra-icon css-onkibi"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <g
+                fill="currentColor"
+              >
+                <path
+                  d="M19.452 7.5H4.547a.5.5 0 00-.5.545l1.287 14.136A2 2 0 007.326 24h9.347a2 2 0 001.992-1.819L19.95 8.045a.5.5 0 00-.129-.382.5.5 0 00-.369-.163zm-9.2 13a.75.75 0 01-1.5 0v-9a.75.75 0 011.5 0zm5 0a.75.75 0 01-1.5 0v-9a.75.75 0 011.5 0zM22 4h-4.75a.25.25 0 01-.25-.25V2.5A2.5 2.5 0 0014.5 0h-5A2.5 2.5 0 007 2.5v1.25a.25.25 0 01-.25.25H2a1 1 0 000 2h20a1 1 0 000-2zM9 3.75V2.5a.5.5 0 01.5-.5h5a.5.5 0 01.5.5v1.25a.25.25 0 01-.25.25h-5.5A.25.25 0 019 3.75z"
+                />
+              </g>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    hidden=""
+    id="__chakra_env"
+  />
+</div>
+`;
