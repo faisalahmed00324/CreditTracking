@@ -20,7 +20,8 @@ namespace CreditTracker.Api.Endpoints.CreditEntries
                 return Results.Ok(result.Value);
             }).RequireAuthorization("ShopPolicy")
                 .WithName("Get Credit Entry By Shop Id")
-                .Produces<GetCreditEntryResponse>(StatusCodes.Status200OK)
+                // BUG FIX: Changed from GetCreditEntryResponse to GetCreditEntriesByShopResponse (wrong Swagger type).
+                .Produces<GetCreditEntriesByShopResponse>(StatusCodes.Status200OK)
                 .ProducesProblem(StatusCodes.Status400BadRequest)
                 .ProducesProblem(StatusCodes.Status409Conflict)
                 .ProducesProblem(StatusCodes.Status404NotFound)

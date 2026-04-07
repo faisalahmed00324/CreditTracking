@@ -5,14 +5,6 @@ using BuildingBlocks.Helper;
 using CreditTracker.Application.Data;
 using CreditTracker.Application.Dtos;
 using CreditTracker.Domain.Models;
-using MediatR;
-using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.WebSockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CreditTracker.Application.Customers.Commands.CreateUser
 {
@@ -39,10 +31,13 @@ namespace CreditTracker.Application.Customers.Commands.CreateUser
             newUser.SetOtp(otp, expiry);
             return newUser;
         }
+        // BUG FIX: Changed from new Random() to Random.Shared to avoid duplicate OTPs
+        // when called in quick succession (new Random() seeds from system clock).
         private string GenerateOtp()
         {
-            return new Random().Next(100000, 999999).ToString();
+            return Random.Shared.Next(100000, 999999).ToString();
         }
+        // NOTE: Placeholder implementation — needs SMS/email service integration.
         private async Task SendOtp(string otp)
         {
             await userRepository.CountAsync(x => x.OtpCode == otp);

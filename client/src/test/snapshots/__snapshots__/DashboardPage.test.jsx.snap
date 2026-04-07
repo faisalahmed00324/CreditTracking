@@ -1,0 +1,669 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DashboardPage - Visual Regression > renders customer dashboard loading state 1`] = `
+<div>
+  <div
+    class="css-1nl61b8"
+  >
+    <div
+      class="chakra-spinner css-9vhpy9"
+    >
+      <span
+        class="css-8b45rq"
+      >
+        Loading...
+      </span>
+    </div>
+  </div>
+  <span
+    hidden=""
+    id="__chakra_env"
+  />
+</div>
+`;
+
+exports[`DashboardPage - Visual Regression > renders dashboard content after loading for customer 1`] = `
+<div>
+  <div
+    class="css-0"
+  >
+    <div
+      class="chakra-stack css-isu5qn"
+    >
+      <span
+        class="chakra-avatar css-61ipzx"
+      >
+        <div
+          aria-label="Test Customer"
+          class="chakra-avatar__initials css-1ebyn6"
+          role="img"
+        >
+          TC
+        </div>
+      </span>
+      <div
+        class="css-0"
+      >
+        <h2
+          class="chakra-heading css-18j379d"
+        >
+          Welcome, 
+          Test Customer
+          !
+        </h2>
+        <div
+          class="chakra-stack css-wt1v79"
+        >
+          <span
+            class="chakra-badge css-lj5ggk"
+          >
+            Customer
+          </span>
+          <p
+            class="chakra-text css-89mcmc"
+          >
+            customer@email.com
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-be1kce"
+    >
+      <div
+        class="chakra-card css-jv498s"
+      >
+        <div
+          class="chakra-card__body css-1idwstw"
+        >
+          <div
+            class="chakra-stat css-1mbo1ls"
+          >
+            <dl>
+              <dt
+                class="chakra-stat__label css-14go5ty"
+              >
+                Total Entries
+              </dt>
+              <dd
+                class="chakra-stat__number css-1axeus7"
+              >
+                0
+              </dd>
+              <dd
+                class="chakra-stat__help-text css-1phhsu0"
+              >
+                All credit entries
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+      <div
+        class="chakra-card css-jv498s"
+      >
+        <div
+          class="chakra-card__body css-1idwstw"
+        >
+          <div
+            class="chakra-stat css-1mbo1ls"
+          >
+            <dl>
+              <dt
+                class="chakra-stat__label css-14go5ty"
+              >
+                Unpaid
+              </dt>
+              <dd
+                class="chakra-stat__number css-1yg4qlp"
+              >
+                0
+              </dd>
+              <dd
+                class="chakra-stat__help-text css-1phhsu0"
+              >
+                Pending payment
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+      <div
+        class="chakra-card css-jv498s"
+      >
+        <div
+          class="chakra-card__body css-1idwstw"
+        >
+          <div
+            class="chakra-stat css-1mbo1ls"
+          >
+            <dl>
+              <dt
+                class="chakra-stat__label css-14go5ty"
+              >
+                Paid
+              </dt>
+              <dd
+                class="chakra-stat__number css-g1g50m"
+              >
+                0
+              </dd>
+              <dd
+                class="chakra-stat__help-text css-1phhsu0"
+              >
+                Completed
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+      <div
+        class="chakra-card css-jv498s"
+      >
+        <div
+          class="chakra-card__body css-1idwstw"
+        >
+          <div
+            class="chakra-stat css-1mbo1ls"
+          >
+            <dl>
+              <dt
+                class="chakra-stat__label css-14go5ty"
+              >
+                Total Amount
+              </dt>
+              <dd
+                class="chakra-stat__number css-aei7pi"
+              >
+                RM 0.00
+              </dd>
+              <dd
+                class="chakra-stat__help-text css-1phhsu0"
+              >
+                All entries
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2
+      class="chakra-heading css-1p6q0l9"
+    >
+      Quick Actions
+    </h2>
+    <div
+      class="css-1wwum9q"
+    >
+      <div
+        class="chakra-card css-fmcy4x"
+      >
+        <div
+          class="chakra-card__body css-1idwstw"
+        >
+          <div
+            class="chakra-stack css-8pmr8q"
+          >
+            <svg
+              class="chakra-icon css-b93dn1"
+              fill="none"
+              focusable="false"
+              height="1em"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line
+                x1="8"
+                x2="21"
+                y1="6"
+                y2="6"
+              />
+              <line
+                x1="8"
+                x2="21"
+                y1="12"
+                y2="12"
+              />
+              <line
+                x1="8"
+                x2="21"
+                y1="18"
+                y2="18"
+              />
+              <line
+                x1="3"
+                x2="3.01"
+                y1="6"
+                y2="6"
+              />
+              <line
+                x1="3"
+                x2="3.01"
+                y1="12"
+                y2="12"
+              />
+              <line
+                x1="3"
+                x2="3.01"
+                y1="18"
+                y2="18"
+              />
+            </svg>
+            <div
+              class="css-0"
+            >
+              <p
+                class="chakra-text css-2ygcmq"
+              >
+                View Credit Entries
+              </p>
+              <p
+                class="chakra-text css-89mcmc"
+              >
+                Browse all credit entries
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    hidden=""
+    id="__chakra_env"
+  />
+</div>
+`;
+
+exports[`DashboardPage - Visual Regression > renders dashboard content after loading for shop 1`] = `
+<div>
+  <div
+    class="css-0"
+  >
+    <div
+      class="chakra-stack css-isu5qn"
+    >
+      <span
+        class="chakra-avatar css-perryd"
+      >
+        <div
+          aria-label="Shop Owner"
+          class="chakra-avatar__initials css-1ebyn6"
+          role="img"
+        >
+          SO
+        </div>
+      </span>
+      <div
+        class="css-0"
+      >
+        <h2
+          class="chakra-heading css-18j379d"
+        >
+          Welcome, 
+          Shop Owner
+          !
+        </h2>
+        <div
+          class="chakra-stack css-wt1v79"
+        >
+          <span
+            class="chakra-badge css-1j1ty0z"
+          >
+            Shop
+          </span>
+          <p
+            class="chakra-text css-89mcmc"
+          >
+            shop@email.com
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-be1kce"
+    >
+      <div
+        class="chakra-card css-jv498s"
+      >
+        <div
+          class="chakra-card__body css-1idwstw"
+        >
+          <div
+            class="chakra-stat css-1mbo1ls"
+          >
+            <dl>
+              <dt
+                class="chakra-stat__label css-14go5ty"
+              >
+                Total Entries
+              </dt>
+              <dd
+                class="chakra-stat__number css-1axeus7"
+              >
+                0
+              </dd>
+              <dd
+                class="chakra-stat__help-text css-1phhsu0"
+              >
+                All credit entries
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+      <div
+        class="chakra-card css-jv498s"
+      >
+        <div
+          class="chakra-card__body css-1idwstw"
+        >
+          <div
+            class="chakra-stat css-1mbo1ls"
+          >
+            <dl>
+              <dt
+                class="chakra-stat__label css-14go5ty"
+              >
+                Unpaid
+              </dt>
+              <dd
+                class="chakra-stat__number css-1yg4qlp"
+              >
+                0
+              </dd>
+              <dd
+                class="chakra-stat__help-text css-1phhsu0"
+              >
+                Pending payment
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+      <div
+        class="chakra-card css-jv498s"
+      >
+        <div
+          class="chakra-card__body css-1idwstw"
+        >
+          <div
+            class="chakra-stat css-1mbo1ls"
+          >
+            <dl>
+              <dt
+                class="chakra-stat__label css-14go5ty"
+              >
+                Paid
+              </dt>
+              <dd
+                class="chakra-stat__number css-g1g50m"
+              >
+                0
+              </dd>
+              <dd
+                class="chakra-stat__help-text css-1phhsu0"
+              >
+                Completed
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+      <div
+        class="chakra-card css-jv498s"
+      >
+        <div
+          class="chakra-card__body css-1idwstw"
+        >
+          <div
+            class="chakra-stat css-1mbo1ls"
+          >
+            <dl>
+              <dt
+                class="chakra-stat__label css-14go5ty"
+              >
+                Total Amount
+              </dt>
+              <dd
+                class="chakra-stat__number css-aei7pi"
+              >
+                RM 0.00
+              </dd>
+              <dd
+                class="chakra-stat__help-text css-1phhsu0"
+              >
+                All entries
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2
+      class="chakra-heading css-1p6q0l9"
+    >
+      Quick Actions
+    </h2>
+    <div
+      class="css-1wwum9q"
+    >
+      <div
+        class="chakra-card css-fmcy4x"
+      >
+        <div
+          class="chakra-card__body css-1idwstw"
+        >
+          <div
+            class="chakra-stack css-8pmr8q"
+          >
+            <svg
+              class="chakra-icon css-b93dn1"
+              fill="none"
+              focusable="false"
+              height="1em"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line
+                x1="8"
+                x2="21"
+                y1="6"
+                y2="6"
+              />
+              <line
+                x1="8"
+                x2="21"
+                y1="12"
+                y2="12"
+              />
+              <line
+                x1="8"
+                x2="21"
+                y1="18"
+                y2="18"
+              />
+              <line
+                x1="3"
+                x2="3.01"
+                y1="6"
+                y2="6"
+              />
+              <line
+                x1="3"
+                x2="3.01"
+                y1="12"
+                y2="12"
+              />
+              <line
+                x1="3"
+                x2="3.01"
+                y1="18"
+                y2="18"
+              />
+            </svg>
+            <div
+              class="css-0"
+            >
+              <p
+                class="chakra-text css-2ygcmq"
+              >
+                View Credit Entries
+              </p>
+              <p
+                class="chakra-text css-89mcmc"
+              >
+                Browse all credit entries
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="chakra-card css-1fswv00"
+      >
+        <div
+          class="chakra-card__body css-1idwstw"
+        >
+          <div
+            class="chakra-stack css-8pmr8q"
+          >
+            <svg
+              class="chakra-icon css-1cfyg4q"
+              fill="none"
+              focusable="false"
+              height="1em"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="10"
+              />
+              <line
+                x1="12"
+                x2="12"
+                y1="8"
+                y2="16"
+              />
+              <line
+                x1="8"
+                x2="16"
+                y1="12"
+                y2="12"
+              />
+            </svg>
+            <div
+              class="css-0"
+            >
+              <p
+                class="chakra-text css-2ygcmq"
+              >
+                Create New Entry
+              </p>
+              <p
+                class="chakra-text css-89mcmc"
+              >
+                Add a credit entry for a customer
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="chakra-card css-13tl801"
+      >
+        <div
+          class="chakra-card__body css-1idwstw"
+        >
+          <div
+            class="chakra-stack css-8pmr8q"
+          >
+            <svg
+              class="chakra-icon css-1sezof7"
+              fill="none"
+              focusable="false"
+              height="1em"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="11"
+                cy="11"
+                r="8"
+              />
+              <line
+                x1="21"
+                x2="16.65"
+                y1="21"
+                y2="16.65"
+              />
+            </svg>
+            <div
+              class="css-0"
+            >
+              <p
+                class="chakra-text css-2ygcmq"
+              >
+                Search Customers
+              </p>
+              <p
+                class="chakra-text css-89mcmc"
+              >
+                Find customers and their entries
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    hidden=""
+    id="__chakra_env"
+  />
+</div>
+`;
+
+exports[`DashboardPage - Visual Regression > renders shop dashboard loading state 1`] = `
+<div>
+  <div
+    class="css-1nl61b8"
+  >
+    <div
+      class="chakra-spinner css-9vhpy9"
+    >
+      <span
+        class="css-8b45rq"
+      >
+        Loading...
+      </span>
+    </div>
+  </div>
+  <span
+    hidden=""
+    id="__chakra_env"
+  />
+</div>
+`;

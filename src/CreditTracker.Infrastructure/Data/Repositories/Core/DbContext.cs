@@ -1,4 +1,4 @@
-﻿using CreditTracker.Infrastructure.Map;
+using CreditTracker.Infrastructure.Map;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using System;
@@ -38,7 +38,7 @@ namespace CreditTracker.Infrastructure.Data.Repositories.Core
             {
                 new IgnoreExtraElementsConvention(true)
             };
-            ConventionRegistry.Register("My convections", pack, t => true);
+            ConventionRegistry.Register("My conventions", pack, t => true);
         }
         public void AddCommand(Func<Task> func)
         {

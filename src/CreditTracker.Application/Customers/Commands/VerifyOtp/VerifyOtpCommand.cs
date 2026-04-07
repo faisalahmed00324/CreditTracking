@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 
 namespace CreditTracker.Application.Customers.Commands.VerifyOtp
 {
-    public record VerifyOtpCommand(string Id, string Otp) : IQuery<Result<VerifyOtpResult>>;
+    // BUG FIX: Changed from IQuery to ICommand — VerifyOtp modifies state (updates user verification),
+// so it must be a command to enable the ValidationBehavior pipeline.
+public record VerifyOtpCommand(string Id, string Otp) : ICommand<Result<VerifyOtpResult>>;
     public record VerifyOtpResult(bool IsSuccess);
 
     public class VerifyOtpCommandValidator : AbstractValidator<VerifyOtpCommand>
