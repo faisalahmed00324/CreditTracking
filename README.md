@@ -18,6 +18,7 @@ CreditTracker is a .NET 9.0 solution for tracking credit entries between shops a
 - `src/CreditTracker.Domain`: Domain models and abstractions
 - `src/CreditTracker.Infrastructure`: MongoDB repositories and mappings
 - `src/BuildingBlocks/BuildingBlocks`: Shared utilities, CQRS, exception handling
+- `mobile-app/CreditTracker`: React Native mobile app for Android and iOS
 
 ## Getting Started
 
@@ -42,6 +43,18 @@ CreditTracker is a .NET 9.0 solution for tracking credit entries between shops a
 - Register a new user (role: Customer)
 - Login to receive JWT token
 - Use token to access protected endpoints for credit entry management
+
+## Mobile App
+
+A React Native mobile application is available in the `mobile-app/CreditTracker` directory. The mobile app provides:
+
+- Cross-platform support (Android & iOS)
+- User authentication (login, registration, OTP verification)
+- Credit entry management (view, create, update, delete)
+- Customer search functionality
+- Profile management
+
+See `mobile-app/CreditTracker/README.md` for detailed setup instructions.
 
 ## License
 
