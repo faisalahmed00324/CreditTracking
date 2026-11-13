@@ -148,7 +148,7 @@ User (Shop) ──1:N──► CreditEntry ◄──N:1── User (Customer)
 1. Find verified, active user by username
 2. Verify password hash using constant-time comparison
 3. Generate JWT with claims: NameIdentifier, Email, Role
-4. Token valid for 7 days
+4. Token expires after 7 days (as configured in the current login handler)
 
 ### Get Current User (`GET /user/getcurrentuser`)
 1. Extract user ID from JWT `NameIdentifier` claim
@@ -214,7 +214,7 @@ User (Shop) ──1:N──► CreditEntry ◄──N:1── User (Customer)
 3. POST /login
    ├── Validates username + password
    ├── Checks IsVerified = true
-   └── Returns JWT token (7-day expiry)
+   └── Returns a JWT token (7-day expiry)
 
 4. Subsequent requests
    └── Authorization: Bearer <token>
@@ -259,7 +259,7 @@ User (Shop) ──1:N──► CreditEntry ◄──N:1── User (Customer)
 
 ---
 
-## Known Issues and Inconsistencies (Fixed)
+## Implementation Notes and Historical Fixes
 
 The following issues were found during codebase analysis and have been fixed:
 
@@ -283,17 +283,14 @@ The following issues were found during codebase analysis and have been fixed:
 **Issue:** Record named `GetCreditEntriesByCustomerRespopnse` (misspelled).
 **Fix:** Renamed to `GetCreditEntriesByCustomerResponse`.
 
-### 5. Weak OTP Generation (FIXED)
+### 5. OTP Generation
 **File:** `CreateUserHandler.cs`
-**Issue:** `new Random()` created per call can produce identical values when called in quick succession.
-**Fix:** Changed to use `Random.Shared` which is thread-safe and properly seeded.
+**Note:** The current implementation uses `Random.Shared`. For security-sensitive one-time codes, use a cryptographically secure random-number generator (for example, `RandomNumberGenerator.GetInt32`) rather than a general-purpose PRNG.
 
 ### 6. Placeholder SendOtp Implementation
 **File:** `CreateUserHandler.cs`
 **Issue:** `SendOtp()` method just counts OTP records instead of actually sending. This is a known placeholder — requires SMS/email service integration.
 **Status:** Documented but not fixed (requires external service integration).
 
-### 7. Unused Imports (FIXED)
-**File:** `CreateUserHandler.cs`
-**Issue:** Multiple unused `using` statements (`MediatR`, `Microsoft.VisualBasic`, `System.Net.WebSockets`, etc.).
-**Fix:** Removed all unused imports.
+### 7. Credential-free user responses
+User lookup and customer-search responses use `UserResponseDto`, which deliberately excludes the password field. The credential-bearing `UserDto` remains used for registration and internal login processing.
