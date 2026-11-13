@@ -283,9 +283,9 @@ The following issues were found during codebase analysis and have been fixed:
 **Issue:** Record named `GetCreditEntriesByCustomerRespopnse` (misspelled).
 **Fix:** Renamed to `GetCreditEntriesByCustomerResponse`.
 
-### 5. OTP Generation
+### 5. Cryptographically secure OTP generation
 **File:** `CreateUserHandler.cs`
-**Note:** The current implementation uses `Random.Shared`. For security-sensitive one-time codes, use a cryptographically secure random-number generator (for example, `RandomNumberGenerator.GetInt32`) rather than a general-purpose PRNG.
+**Implementation:** Six-digit OTPs are generated with `RandomNumberGenerator.GetInt32`, which uses a cryptographically secure random-number generator.
 
 ### 6. Placeholder SendOtp Implementation
 **File:** `CreateUserHandler.cs`
