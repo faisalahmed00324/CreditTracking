@@ -1,4 +1,4 @@
-﻿using Carter;
+using Carter;
 using CreditTracker.Application.Customers.Queries.GetUser;
 using CreditTracker.Application.Dtos;
 using MediatR;
@@ -6,7 +6,7 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace CreditTracker.Api.Endpoints.User
 {
-    public record GetUserResponse(UserDto User);
+    public record GetUserResponse(UserResponseDto User);
     public class GetUserById : ICarterModule
     {
         public void AddRoutes(IEndpointRouteBuilder app)
@@ -18,17 +18,16 @@ namespace CreditTracker.Api.Endpoints.User
                 return Results.Ok(result.Value);
             }).RequireAuthorization("ShopPolicy")
                 .WithName("Get User by Id")
-                // BUG FIX: Changed from GetCreditEntryResponse to GetUserResponse (wrong Swagger type).
                 .Produces<GetUserResponse>(StatusCodes.Status200OK)
                 .ProducesProblem(StatusCodes.Status400BadRequest)
                 .ProducesProblem(StatusCodes.Status409Conflict)
                 .ProducesProblem(StatusCodes.Status404NotFound)
                 .ProducesProblem(StatusCodes.Status401Unauthorized)
                 .WithSummary("Get a User")
-                .WithDescription("Get a User")
+                .WithDescription("Returns a user profile without credentials")
                 .WithMetadata(new SwaggerOperationAttribute(
                     summary: "Get a User",
-                    description: "Returns a User"
+                    description: "Returns a user profile without credentials"
                 ));
         }
     }
