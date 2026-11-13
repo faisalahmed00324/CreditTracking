@@ -1,161 +1,189 @@
 # CreditTracker
 
-CreditTracker tracks credit entries between shops and customers. The backend is an ASP.NET Core API backed by MongoDB; a React web client provides registration, login, dashboards, and credit-entry management.
-
-This checkout contains both the .NET 10 API and the React source in `client/`. Run the API and web development server separately using the instructions below.
+A full-stack credit management application built with **.NET 10, ASP.NET Core, React, and MongoDB**. CreditTracker helps shops manage customer credit transactions, track outstanding payments, and maintain transaction history.
 
 ## Features
 
-- User registration and authentication (JWT-based)
-- OTP verification for new users
-- Role-based authorization (Shop, Customer)
-- CRUD operations for credit entries
-- Pagination support for listing credit entries
-- Health checks for MongoDB
-- React dashboards and role-protected pages for shops and customers
-- Customer search, credit-entry creation, and payment updates in the web client
-- Chakra UI components with light/dark theming
+- User registration and JWT-based authentication
+- OTP-based account verification flow
+- Role-based authorization for Shop and Customer users
+- Customer search and management
+- Create, view, update, and soft-delete credit entries
+- Payment status and payment date tracking
+- Paginated credit entry listings
+- MongoDB health checks
+- React-based frontend with responsive UI components
 
-## Project Structure
+> **Note:** OTP generation and verification are implemented, but actual email/SMS delivery requires integration with an external messaging provider.
 
-- `src/CreditTracker.Api`: ASP.NET Core Web API endpoints
-- `src/CreditTracker.Application`: Application logic, CQRS handlers, DTOs, validation
-- `src/CreditTracker.Domain`: Domain models and abstractions
-- `src/CreditTracker.Infrastructure`: MongoDB repositories and mappings
-- `src/BuildingBlocks/BuildingBlocks`: Shared utilities, CQRS, exception handling
-- `tests/CreditTracker.Api.Tests`: JWT configuration and token-validation tests
-- `tests/CreditTracker.Application.Tests`: Application handlers, validators, and domain tests
-- `docs/`: API endpoint reference, technical overview, and UI component documentation
-- `client/`: React web application
-  - `src/api/`: Axios client and authentication, user, and credit-entry requests
-  - `src/context/`: Authentication state
-  - `src/components/`: Shared UI, layout, and route protection
-  - `src/pages/`: Login, registration, dashboards, and credit-entry screens
-  - `src/test/`: Component and snapshot tests
+## Technology Stack
 
-## Getting Started: API
+### Backend
+- C#
+- .NET 10
+- ASP.NET Core Web API
+- CQRS and MediatR
+- MongoDB
+- JWT Bearer Authentication
+- FluentValidation
+- Carter
+- Swagger / OpenAPI
+
+### Frontend
+- React 19
+- Vite
+- JavaScript
+- Chakra UI
+- Axios
+- React Router
+
+### Testing
+- xUnit
+- Vitest
+- React Testing Library
+
+## Architecture
+
+The backend follows a layered architecture with separation of concerns between the API, application logic, domain models, and infrastructure.
+
+```text
+CreditTracker
+│
+├── src
+│   ├── CreditTracker.Api
+│   │   └── API endpoints, authentication, middleware
+│   │
+│   ├── CreditTracker.Application
+│   │   └── CQRS handlers, DTOs, validation
+│   │
+│   ├── CreditTracker.Domain
+│   │   └── Entities, aggregates, domain events
+│   │
+│   ├── CreditTracker.Infrastructure
+│   │   └── MongoDB repositories, persistence
+│   │
+│   └── BuildingBlocks
+│       └── Shared CQRS interfaces, behaviors, exceptions
+│
+├── client
+│   └── React application
+│
+├── docs
+│   ├── api-endpoints.md
+│   ├── technical-overview.md
+│   └── ui-components.md
+│
+└── tests
+    └── CreditTracker.Application.Tests
+```
+
+### Request flow
+
+```text
+HTTP Request
+    ↓
+ASP.NET Core API
+    ↓
+Carter Endpoint
+    ↓
+MediatR / CQRS
+    ↓
+Application Handler
+    ↓
+Repository / Unit of Work
+    ↓
+MongoDB
+```
+
+## Core Functional Areas
+
+| Area | Capabilities |
+|---|---|
+| Authentication | Registration, OTP verification, login, JWT |
+| User Management | Shop and customer roles, customer search |
+| Credit Management | Create, retrieve, update, and soft-delete entries |
+| Payment Tracking | Track paid status and payment dates |
+| Reporting | Paginated credit entry listings |
+| Monitoring | MongoDB health check endpoint |
+
+## Getting Started
 
 ### Prerequisites
 
-- .NET 10.0 SDK
-- MongoDB running locally at `mongodb://localhost:27017`
-- OpenSSL for the example random-key generation commands
+- .NET 10 SDK
+- MongoDB instance
+- Node.js and npm
 
-### Local configuration
+### 1. Clone the repository
 
-`src/CreditTracker.Api/appsettings.json` contains non-secret defaults for the database, JWT issuer, and audience. **Do not add a signing secret to this file or to `launchSettings.json`.**
-
-For local development, generate a new 64-byte random key and store it outside the repository with .NET User Secrets. The project already has a `UserSecretsId`:
-
-```sh
-python3 - <<'PY'
-import json
-import secrets
-import subprocess
-
-subprocess.run(
-    ["dotnet", "user-secrets", "set", "--project", "src/CreditTracker.Api"],
-    input=json.dumps({"JwtSettings:Secret": secrets.token_urlsafe(64)}),
-    text=True,
-    check=True,
-)
-PY
+```bash
+git clone https://github.com/faisalahmed00324/CreditTracking.git
+cd CreditTracking
 ```
 
-This example requires Python 3, keeps the secret out of shell history and command-line arguments, and replaces the local key each time it is run. User Secrets are loaded in `Development` and are **not encrypted**; they are not a production secret manager.
+### 2. Configure the backend
 
-Alternatively, configure an environment variable for the API process:
+Configure the database and JWT settings using your local development configuration or .NET User Secrets.
 
-```sh
-export JwtSettings__Secret="$(openssl rand -base64 64 | tr -d '\n')"
-dotnet run --project src/CreditTracker.Api --launch-profile http
-unset JwtSettings__Secret
-```
+Do not commit real credentials, connection strings, or JWT signing secrets.
 
-ASP.NET Core maps `__` to `:` and gives environment variables precedence over JSON and User Secrets. It does **not** automatically load `.env` files. Never expose the signing secret through a `VITE_*` variable or any browser bundle.
+### 3. Run the backend
 
-The API fails at startup if the key is missing, blank, shorter than 32 UTF-8 bytes, or matches the previously exposed key. Length alone does not guarantee entropy: always use a cryptographically random generator. Keys are used as UTF-8 strings, so provide the same exact string to every instance in the same environment. JWT issuer and audience must also be non-empty.
-
-### Build, test, and run
-
-```sh
+```bash
+dotnet restore CreditTracker.sln
 dotnet build CreditTracker.sln
-dotnet test CreditTracker.sln
-dotnet run --project src/CreditTracker.Api --launch-profile http
+dotnet run --project src/CreditTracker.Api/CreditTracker.Api.csproj
 ```
 
-- API: `http://localhost:5034`
-- Swagger UI: `http://localhost:5034/swagger`
-- MongoDB health check: `http://localhost:5034/health`
-- HTTPS profile: `dotnet run --project src/CreditTracker.Api --launch-profile https` (HTTPS on port `7289`; trust the local certificate with `dotnet dev-certs https --trust`)
+The API development URLs and ports depend on the local launch configuration. Swagger is available at `/swagger` when enabled.
 
-Database defaults are `mongodb://localhost:27017` and `CreditTrackerDb`. Override them with `Database__Connection` and `Database__Name`. Inject connection strings containing credentials through protected configuration, not committed JSON.
+### 4. Run the frontend
 
-### Deployment and exposed-key response
+Open another terminal:
 
-1. Treat the previously committed JWT key as compromised. Provision a **new, unique key per environment** in your deployment secret manager and inject it as `JwtSettings__Secret` at runtime. Do not put it in Docker build arguments, images, CI logs, or committed configuration.
-2. Restart or redeploy **every** API instance with only the new key. The API shares one startup key between token issuance and validation; key changes require a restart. Do not retain the compromised key as a validation fallback.
-3. Existing tokens signed with the old key must be rejected, even if they have not expired. Users must sign in again. Verify this against the deployed service and review authentication/activity logs for possible misuse.
-4. Coordinate a separate Git-history cleanup. The exposed key was introduced in commit `7f57273` and also occurs in a test file on other refs. Removing it from the latest JSON does not remove it from earlier commits.
-5. In a separate, fully fetched mirror clone, scan all branches and tags and use a tool such as `git-filter-repo` with a private replacement file outside the repository to replace the exposed value across history. Secure any audit clone because it still contains the exposed key. Review and approve the affected refs before any force-push; history rewriting changes commit IDs and requires collaborator coordination.
-6. Rescan rewritten history and coordinate clean clones for collaborators. Review PR refs, hosted caches, artifacts, and forks; contact the hosting provider where needed. Public copies may remain, so history rewriting never substitutes for key rotation.
-
-The development key is not a production replacement key. Rotation in this checkout does not update deployed services or other branches automatically.
-
-## Getting Started: React Client
-
-### Stack and prerequisites
-
-The client uses React 19, Vite 8, Chakra UI 2, React Router, and Axios, with Vitest and React Testing Library for tests. Use Node.js 22.12+ (or another version supported by Vite 8) and npm. Dependency versions and available scripts are defined in `client/package.json`.
-
-### Install, develop, and build
-
-From the repository root:
-
-```sh
+```bash
 cd client
-npm ci
+npm install
 npm run dev
 ```
 
-The development server runs at `http://localhost:3000`. Start the compatible API and MongoDB separately.
+The Vite development server is configured to use port `3000`.
 
-```sh
-npm run build       # Production files in client/dist
-npm run preview     # Preview the production build locally
-npm test            # Component and snapshot tests
-npm run test:watch  # Watch mode
+Check the frontend API base URL and Vite proxy configuration against the backend URL used by your local environment.
+
+## Running Tests
+
+### Backend tests
+
+```bash
+dotnet test CreditTracker.sln
 ```
 
-### API connection and authentication
+### Frontend tests
 
-- `client/src/api/client.js` currently sets the API base URL to `http://localhost:5034`; it does not read a `VITE_API_URL` setting. Change that non-secret URL when deploying against another API host.
-- The client attaches the JWT from browser storage as `Authorization: Bearer ...`. A `401` response clears stored authentication and redirects to login.
-- `src/context/AuthContext.jsx` manages authentication state; `ProtectedRoute` gates authenticated pages and shop-only entry creation. The API remains responsible for enforcing authorization.
-- Serve production traffic over HTTPS. Never include the JWT **signing key** in frontend configuration; the browser needs only tokens issued by the API.
-- The backend's `AllowLocalhost` CORS policy permits `http://localhost:3000`. Update the allowed origins for other development hosts or production deployments; do not use a wildcard production policy as a shortcut.
-- Vite's `/api` proxy does not affect the current absolute Axios base URL. If switching to a same-origin proxy, align the Axios base URL, proxy target, API scheme/port, and route rewriting; the current proxy target uses HTTPS on port `5034`, while the API's HTTP profile uses HTTP on that port.
-- A production static host must fall back to `index.html` for React Router paths such as `/dashboard`.
+```bash
+cd client
+npm test
+```
 
-### Common issues
+### Frontend production build
 
-- **`npm ci` cannot find `package.json`:** the checkout does not contain frontend source; ignored dependencies/build files are not sufficient.
-- **API fails before starting:** configure a fresh JWT key and check issuer/audience. A stale environment variable overrides User Secrets.
-- **Empty data or failed requests:** confirm MongoDB and the API are running, inspect the API base URL, and check CORS and certificate errors in the browser console.
-- **Login required after rotation:** expected; the old token can no longer authenticate.
+```bash
+cd client
+npm run build
+```
 
-## Usage
+## API Documentation
 
-- Register a new user (role: Customer)
-- Login to receive JWT token
-- Use token to access protected endpoints for credit entry management
+Detailed endpoint documentation is available in:
 
-## Further Documentation
+- `docs/api-endpoints.md`
+- `docs/technical-overview.md`
 
-- [API endpoint reference](docs/api-endpoints.md)
-- [Technical overview](docs/technical-overview.md)
-- [UI components](docs/ui-components.md)
+## Project Purpose
+
+This project demonstrates full-stack application development using modern .NET and React technologies, with an emphasis on layered architecture, CQRS, authentication, MongoDB persistence, and frontend/backend integration.
 
 ## License
 
-Licensed under the [MIT License](LICENSE).
+Add a repository license file if you intend to distribute this project under an open-source license.
