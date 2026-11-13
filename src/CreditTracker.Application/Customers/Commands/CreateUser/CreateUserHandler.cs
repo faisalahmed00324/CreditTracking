@@ -5,6 +5,7 @@ using BuildingBlocks.Helper;
 using CreditTracker.Application.Data;
 using CreditTracker.Application.Dtos;
 using CreditTracker.Domain.Models;
+using System.Security.Cryptography;
 
 namespace CreditTracker.Application.Customers.Commands.CreateUser
 {
@@ -31,11 +32,10 @@ namespace CreditTracker.Application.Customers.Commands.CreateUser
             newUser.SetOtp(otp, expiry);
             return newUser;
         }
-        // BUG FIX: Changed from new Random() to Random.Shared to avoid duplicate OTPs
-        // when called in quick succession (new Random() seeds from system clock).
-        private string GenerateOtp()
+        // Generate a six-digit OTP using a cryptographically secure random-number generator.
+        private static string GenerateOtp()
         {
-            return Random.Shared.Next(100000, 999999).ToString();
+            return RandomNumberGenerator.GetInt32(100000, 1000000).ToString();
         }
         // NOTE: Placeholder implementation — needs SMS/email service integration.
         private async Task SendOtp(string otp)
