@@ -2,7 +2,7 @@
 
 ## Architecture Overview
 
-CreditTracker is a .NET 9.0 ASP.NET Core Web API for tracking credit entries between shops and customers. It follows **Clean Architecture** with **CQRS** (Command Query Responsibility Segregation) using MediatR.
+CreditTracker is a .NET 10.0 ASP.NET Core Web API for tracking credit entries between shops and customers. It follows **Clean Architecture** with **CQRS** (Command Query Responsibility Segregation) using MediatR.
 
 ### Layer Diagram
 
@@ -27,18 +27,21 @@ CreditTracker is a .NET 9.0 ASP.NET Core Web API for tracking credit entries bet
 
 ### Technology Stack
 
+Runtime and framework versions reflect the `net10.0` target framework. Package versions below match the `PackageReference` entries in `src/**/*.csproj`.
+
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| .NET | 9.0 | Runtime |
-| ASP.NET Core | 9.0 | Web framework |
-| Carter | 9.0.0 | Minimal API module routing |
-| MediatR | 12.5.0 | CQRS mediator pattern |
-| MongoDB.Driver | 3.3.0 | Database driver |
-| FluentValidation | 11.11.0 | Input validation |
-| Mapster | 7.4.0 | Object mapping |
+| .NET | 10.0 | Runtime |
+| ASP.NET Core | 10.0 | Web framework |
+| Carter | 10.0.0 | Minimal API module routing |
+| MediatR | 14.1.0 | CQRS mediator pattern |
+| MongoDB.Driver | 3.7.1 | Database driver |
+| FluentValidation | 12.1.1 | Input validation |
+| Mapster | 10.0.6 | Object mapping |
 | Ardalis.Result | 10.1.0 | Result pattern |
-| JWT Bearer | 9.0.4 | Authentication |
-| Swashbuckle | 8.1.1 | OpenAPI documentation |
+| JWT Bearer | 10.0.5 | Authentication |
+| System.IdentityModel.Tokens.Jwt | 8.17.0 | JWT token creation |
+| Swashbuckle | 10.1.7 | OpenAPI documentation |
 
 ### Request Pipeline
 
