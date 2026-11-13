@@ -5,8 +5,9 @@ using CreditTracker.Domain.Models;
 
 namespace CreditTracker.Application.Customers.Commands.VerifyOtp
 {
+    // BUG FIX: Changed from IQueryHandler to ICommandHandler — VerifyOtp modifies database state.
     public class VerifyOtpHandler(IRepository<User> userRepository, IUnitOfWork unitOfWork)
-        : IQueryHandler<VerifyOtpCommand, Result<VerifyOtpResult>>
+        : ICommandHandler<VerifyOtpCommand, Result<VerifyOtpResult>>
     {
         public async Task<Result<VerifyOtpResult>> Handle(VerifyOtpCommand command, CancellationToken cancellationToken)
         {

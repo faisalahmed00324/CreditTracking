@@ -59,3 +59,7 @@ secrets.json
 
 # Include your own folders (if needed)
 src/**/appsettings.Development.json
+
+# React client build artifacts
+client/dist/
+client/node_modules/

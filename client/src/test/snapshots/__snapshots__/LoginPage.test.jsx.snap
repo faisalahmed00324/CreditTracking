@@ -1,0 +1,132 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LoginPage - Visual Regression > renders login form in default state 1`] = `
+<div>
+  <div
+    class="css-17chsbb"
+  >
+    <div
+      class="chakra-card css-derojo"
+    >
+      <div
+        class="chakra-card__body css-9ef6g7"
+      >
+        <form
+          class="chakra-stack css-1urha0v"
+        >
+          <div
+            class="chakra-stack css-ldoqu4"
+          >
+            <h2
+              class="chakra-heading css-14ior2z"
+            >
+              CreditTracker
+            </h2>
+            <p
+              class="chakra-text css-q9k0mw"
+            >
+              Sign in to your account
+            </p>
+          </div>
+          <div
+            class="chakra-form-control css-1kxonj9"
+            role="group"
+          >
+            <label
+              class="chakra-form__label css-g6pte"
+              for="field-_r_0_"
+              id="field-_r_0_-label"
+            >
+              Username
+            </label>
+            <input
+              autocomplete="username"
+              class="chakra-input css-1cjy4zv"
+              id="field-_r_0_"
+              placeholder="Enter your username"
+              value=""
+            />
+          </div>
+          <div
+            class="chakra-form-control css-1kxonj9"
+            role="group"
+          >
+            <label
+              class="chakra-form__label css-g6pte"
+              for="field-_r_1_"
+              id="field-_r_1_-label"
+            >
+              Password
+            </label>
+            <div
+              class="chakra-input__group css-1y0e7gb"
+              data-group="true"
+            >
+              <input
+                autocomplete="current-password"
+                class="chakra-input css-10dip6r"
+                id="field-_r_1_"
+                placeholder="Enter your password"
+                type="password"
+                value=""
+              />
+              <div
+                class="chakra-input__right-element css-1lds0jh"
+              >
+                <button
+                  aria-label="Show password"
+                  class="chakra-button css-okm0kr"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="chakra-icon css-onkibi"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <g
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M23.432,10.524C20.787,7.614,16.4,4.538,12,4.6,7.6,4.537,3.213,7.615.568,10.524a2.211,2.211,0,0,0,0,2.948C3.182,16.351,7.507,19.4,11.839,19.4h.308c4.347,0,8.671-3.049,11.288-5.929A2.21,2.21,0,0,0,23.432,10.524ZM7.4,12A4.6,4.6,0,1,1,12,16.6,4.6,4.6,0,0,1,7.4,12Z"
+                      />
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="2"
+                      />
+                    </g>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <button
+            class="chakra-button css-4cuxxj"
+            type="submit"
+          >
+            Sign In
+          </button>
+          <p
+            class="chakra-text css-89mcmc"
+          >
+            Don't have an account?
+             
+            <a
+              class="chakra-link css-18p1wfu"
+              data-discover="true"
+              href="/register"
+            >
+              Register here
+            </a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+  <span
+    hidden=""
+    id="__chakra_env"
+  />
+</div>
+`;

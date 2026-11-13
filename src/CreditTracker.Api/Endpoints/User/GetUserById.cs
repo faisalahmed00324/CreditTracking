@@ -1,5 +1,4 @@
 ﻿using Carter;
-using CreditTracker.Api.Endpoints.CreditEntries;
 using CreditTracker.Application.Customers.Queries.GetUser;
 using CreditTracker.Application.Dtos;
 using MediatR;
@@ -19,7 +18,8 @@ namespace CreditTracker.Api.Endpoints.User
                 return Results.Ok(result.Value);
             }).RequireAuthorization("ShopPolicy")
                 .WithName("Get User by Id")
-                .Produces<GetCreditEntryResponse>(StatusCodes.Status200OK)
+                // BUG FIX: Changed from GetCreditEntryResponse to GetUserResponse (wrong Swagger type).
+                .Produces<GetUserResponse>(StatusCodes.Status200OK)
                 .ProducesProblem(StatusCodes.Status400BadRequest)
                 .ProducesProblem(StatusCodes.Status409Conflict)
                 .ProducesProblem(StatusCodes.Status404NotFound)

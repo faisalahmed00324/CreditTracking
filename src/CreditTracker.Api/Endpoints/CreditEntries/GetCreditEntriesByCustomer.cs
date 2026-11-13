@@ -8,7 +8,8 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace CreditTracker.Api.Endpoints.CreditEntries
 {
-    public record GetCreditEntriesByCustomerRespopnse(PaginationResult<CreditEntryDto> CreditEntries);
+    // BUG FIX: Fixed typo — "Respopnse" → "Response".
+    public record GetCreditEntriesByCustomerResponse(PaginationResult<CreditEntryDto> CreditEntries);
     public class GetCreditEntriesByCustomer : ICarterModule
     {
         public void AddRoutes(IEndpointRouteBuilder app)
@@ -20,7 +21,8 @@ namespace CreditTracker.Api.Endpoints.CreditEntries
                 return Results.Ok(result.Value);
             }).RequireAuthorization("CustomerPolicy")
                 .WithName("Get Credit Entry By Customer Id")
-                .Produces<GetCreditEntryResponse>(StatusCodes.Status200OK)
+                // BUG FIX: Changed from GetCreditEntryResponse to GetCreditEntriesByCustomerResponse (wrong Swagger type).
+                .Produces<GetCreditEntriesByCustomerResponse>(StatusCodes.Status200OK)
                 .ProducesProblem(StatusCodes.Status400BadRequest)
                 .ProducesProblem(StatusCodes.Status409Conflict)
                 .ProducesProblem(StatusCodes.Status404NotFound)

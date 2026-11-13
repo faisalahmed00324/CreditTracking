@@ -3,7 +3,6 @@ using BuildingBlocks.Helper;
 using Carter;
 using CreditTracker.Application.Customers.Commands.CreateUser;
 using CreditTracker.Application.Dtos;
-using Mapster;
 using MediatR;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -18,7 +17,7 @@ namespace CreditTracker.Api.Endpoints.User
         {
             app.MapPost("/user", async (CreateUserRequest request, ISender sender) =>
             {
-                var command = request.Adapt<CreateUserCommand>();
+                var command = new CreateUserCommand(request.User);
                 var result = await sender.Send(command);
                 return Results.Ok(result.Value);
             })

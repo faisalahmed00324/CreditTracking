@@ -22,7 +22,8 @@ namespace CreditTracker.Api.Endpoints.Login
                 return Results.Ok(result.Value);
 
             }).WithName("Verifyotp")
-            .Produces<LoginResponse>(StatusCodes.Status200OK)
+            // BUG FIX: Changed from LoginResponse to VerifyOtpResponse (wrong Swagger type).
+            .Produces<VerifyOtpResponse>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .WithSummary("Verifyotp")
             .WithDescription("Verifyotp")

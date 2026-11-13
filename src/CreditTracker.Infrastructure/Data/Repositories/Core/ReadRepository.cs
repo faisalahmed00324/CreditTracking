@@ -1,4 +1,4 @@
-﻿using CreditTracker.Application.Data;
+using CreditTracker.Application.Data;
 using CreditTracker.Domain.Abstractions;
 using MongoDB.Bson;
 using MongoDB.Driver;

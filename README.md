@@ -2,7 +2,7 @@
 
 CreditTracker tracks credit entries between shops and customers. The backend is an ASP.NET Core API backed by MongoDB; a React web client provides registration, login, dashboards, and credit-entry management.
 
-**Checkout note:** this `main` checkout contains the .NET 9 API, not the React source. The web client is tracked on `copilot/phase-1-codebase-analysis` and other frontend branches. An existing `client/node_modules` or `client/dist` directory alone is not a runnable source checkout. The client instructions below apply to a branch that contains `client/package.json`; use the compatible API from that branch and apply the JWT security fix there before deployment.
+This checkout contains both the .NET 10 API and the React source in `client/`. Run the API and web development server separately using the instructions below.
 
 ## Features
 
@@ -24,7 +24,9 @@ CreditTracker tracks credit entries between shops and customers. The backend is 
 - `src/CreditTracker.Infrastructure`: MongoDB repositories and mappings
 - `src/BuildingBlocks/BuildingBlocks`: Shared utilities, CQRS, exception handling
 - `tests/CreditTracker.Api.Tests`: JWT configuration and token-validation tests
-- `client/` (frontend branches): React web application
+- `tests/CreditTracker.Application.Tests`: Application handlers, validators, and domain tests
+- `docs/`: API endpoint reference, technical overview, and UI component documentation
+- `client/`: React web application
   - `src/api/`: Axios client and authentication, user, and credit-entry requests
   - `src/context/`: Authentication state
   - `src/components/`: Shared UI, layout, and route protection
@@ -35,7 +37,7 @@ CreditTracker tracks credit entries between shops and customers. The backend is 
 
 ### Prerequisites
 
-- .NET 9.0 SDK for this checkout (other branches may target a different version)
+- .NET 10.0 SDK
 - MongoDB running locally at `mongodb://localhost:27017`
 - OpenSSL for the example random-key generation commands
 
@@ -104,11 +106,11 @@ The development key is not a production replacement key. Rotation in this checko
 
 ### Stack and prerequisites
 
-The client on `copilot/phase-1-codebase-analysis` uses React 19, Vite 8, Chakra UI 2, React Router, and Axios, with Vitest and React Testing Library for tests. Use Node.js 22.12+ (or another version supported by Vite 8) and npm. These details refer to that branch; check `client/package.json` if using a different frontend branch.
+The client uses React 19, Vite 8, Chakra UI 2, React Router, and Axios, with Vitest and React Testing Library for tests. Use Node.js 22.12+ (or another version supported by Vite 8) and npm. Dependency versions and available scripts are defined in `client/package.json`.
 
 ### Install, develop, and build
 
-From a checkout containing the frontend source:
+From the repository root:
 
 ```sh
 cd client
@@ -131,7 +133,7 @@ npm run test:watch  # Watch mode
 - The client attaches the JWT from browser storage as `Authorization: Bearer ...`. A `401` response clears stored authentication and redirects to login.
 - `src/context/AuthContext.jsx` manages authentication state; `ProtectedRoute` gates authenticated pages and shop-only entry creation. The API remains responsible for enforcing authorization.
 - Serve production traffic over HTTPS. Never include the JWT **signing key** in frontend configuration; the browser needs only tokens issued by the API.
-- Cross-origin requests require the compatible backend to allow the web client's origin. This API-only checkout does not configure CORS. Do not use a wildcard production policy as a shortcut.
+- The backend's `AllowLocalhost` CORS policy permits `http://localhost:3000`. Update the allowed origins for other development hosts or production deployments; do not use a wildcard production policy as a shortcut.
 - Vite's `/api` proxy does not affect the current absolute Axios base URL. If switching to a same-origin proxy, align the Axios base URL, proxy target, API scheme/port, and route rewriting; the current proxy target uses HTTPS on port `5034`, while the API's HTTP profile uses HTTP on that port.
 - A production static host must fall back to `index.html` for React Router paths such as `/dashboard`.
 
@@ -147,6 +149,12 @@ npm run test:watch  # Watch mode
 - Register a new user (role: Customer)
 - Login to receive JWT token
 - Use token to access protected endpoints for credit entry management
+
+## Further Documentation
+
+- [API endpoint reference](docs/api-endpoints.md)
+- [Technical overview](docs/technical-overview.md)
+- [UI components](docs/ui-components.md)
 
 ## License
 

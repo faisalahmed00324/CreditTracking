@@ -1,10 +1,5 @@
-﻿using CreditTracker.Domain.Models;
+using CreditTracker.Domain.Models;
 using MongoDB.Bson.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CreditTracker.Infrastructure.Map
 {
@@ -16,7 +11,7 @@ namespace CreditTracker.Infrastructure.Map
             {
                 BsonClassMap.RegisterClassMap<User>(x =>
                 {
-                    x.AutoMap();                     
+                    x.AutoMap();
                 });
             }
         }
