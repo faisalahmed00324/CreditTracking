@@ -2,7 +2,7 @@
 
 ## Overview
 
-CreditTracker exposes a REST API built with ASP.NET Core Minimal APIs (via Carter). All endpoints use JSON request/response bodies. Authentication is JWT Bearer-based where required.
+CreditTracker exposes a REST API built with ASP.NET Core Minimal APIs (via Carter). All endpoints use JSON request/response bodies. Authentication is JWT Bearer-based where required. User profile and customer-search responses omit credentials.
 
 Base URL (development): `https://localhost:7289` or `http://localhost:5034`
 
@@ -23,7 +23,6 @@ Base URL (development): `https://localhost:7289` or `http://localhost:5034`
 {
   "user": {
     "userName": "string",
-    "password": "string",
     "name": "string",
     "iCNoOrPassport": "string",
     "role": 2,
@@ -156,7 +155,6 @@ Base URL (development): `https://localhost:7289` or `http://localhost:5034`
   "user": {
     "id": "string",
     "userName": "string",
-    "password": "string",
     "name": "string",
     "iCNoOrPassport": "string",
     "role": 1,
@@ -190,7 +188,7 @@ Base URL (development): `https://localhost:7289` or `http://localhost:5034`
 **Success Response (200 OK):**
 ```json
 {
-  "user": { "...UserDto fields..." }
+  "user": { "...UserResponseDto fields (no password)..." }
 }
 ```
 
@@ -217,7 +215,7 @@ Base URL (development): `https://localhost:7289` or `http://localhost:5034`
 ```json
 {
   "users": [
-    { "...UserDto fields..." }
+    { "...UserResponseDto fields (no password)..." }
   ]
 }
 ```
