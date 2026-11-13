@@ -2,21 +2,20 @@
 using BuildingBlocks.CQRS;
 using BuildingBlocks.Exceptions;
 using BuildingBlocks.Helper;
+using CreditTracker.Application.Commons;
 using CreditTracker.Application.Data;
 using CreditTracker.Application.Dtos;
 using CreditTracker.Application.Exception;
 using CreditTracker.Domain.Models;
 using Mapster;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 
 
 namespace CreditTracker.Application.Customers.Commands.Login
 {
-    partial class LoginHandler(IRepository<User> userRepo, IConfiguration configuration) : ICommandHandler<LoginCommand, Result<LoginResult>>
+    partial class LoginHandler(IRepository<User> userRepo, JwtSettings jwtSettings) : ICommandHandler<LoginCommand, Result<LoginResult>>
     {
         public async Task<Result<LoginResult>> Handle(LoginCommand command, CancellationToken cancellationToken)
         {
@@ -43,12 +42,11 @@ namespace CreditTracker.Application.Customers.Commands.Login
             new Claim(ClaimTypes.Role, user.Role.ToString()),
         };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Secret"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var creds = new SigningCredentials(jwtSettings.SigningKey, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                issuer: configuration["JwtSettings:Issuer"],
-                audience: configuration["JwtSettings:Audience"],
+                issuer: jwtSettings.Issuer,
+                audience: jwtSettings.Audience,
                 claims: claims,
                 expires: DateTime.UtcNow.AddDays(7),
                 signingCredentials: creds

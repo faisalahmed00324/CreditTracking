@@ -10,7 +10,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
-using System.Text;
 
 namespace CreditTracker.Api
 {
@@ -18,6 +17,9 @@ namespace CreditTracker.Api
     {
         public static IServiceCollection AddApiServices(this IServiceCollection services, IConfiguration configuration)
         {
+            // Validate before startup and share one key snapshot between signing and validation.
+            var jwtSettings = new JwtSettings(configuration);
+            services.AddSingleton(jwtSettings);
             services.AddCarter();
             var connectionString = configuration.GetSection("Database:Connection").Value!;
             var databaseName = configuration.GetSection("Database:Name").Value!;
@@ -27,8 +29,6 @@ namespace CreditTracker.Api
                 .AddMongoDb();
           
             services.AddEndpointsApiExplorer();
-            var jwtSettings = configuration.GetSection("JwtSettings");
-            var key = Encoding.UTF8.GetBytes(jwtSettings["Secret"]);
             services.AddAuthentication("Bearer")    
                 .AddJwtBearer("Bearer", options =>
                 {
@@ -37,9 +37,11 @@ namespace CreditTracker.Api
                         ValidateIssuer = true,
                         ValidateAudience = true,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = jwtSettings["Issuer"],
-                        ValidAudience = jwtSettings["Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(key)
+                        ValidateLifetime = true,
+                        ValidAlgorithms = new[] { SecurityAlgorithms.HmacSha256 },
+                        ValidIssuer = jwtSettings.Issuer,
+                        ValidAudience = jwtSettings.Audience,
+                        IssuerSigningKey = jwtSettings.SigningKey
                     };
                 });
             services.AddSwaggerGen(c =>
