@@ -24,6 +24,7 @@ namespace CreditTracker.Api.Endpoints.CreditEntries
                 .ProducesProblem(StatusCodes.Status409Conflict)
                 .ProducesProblem(StatusCodes.Status404NotFound)
                 .ProducesProblem(StatusCodes.Status401Unauthorized)
+                .ProducesProblem(StatusCodes.Status403Forbidden)
                 .WithSummary("Delete Credit Entry")
                 .WithDescription("Delete Credit Entry")
                 .WithMetadata(new SwaggerOperationAttribute(

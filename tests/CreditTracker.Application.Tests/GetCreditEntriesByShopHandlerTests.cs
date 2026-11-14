@@ -1,5 +1,6 @@
 using CreditTracker.Application.CreditEntries.Query.GetCreditEntriesByShop;
 using CreditTracker.Application.Data;
+using CreditTracker.Application.Commons;
 using CreditTracker.Domain.Models;
 using BuildingBlocks.Pagination;
 using FluentAssertions;
@@ -16,7 +17,9 @@ public class GetCreditEntriesByShopHandlerTests
     public GetCreditEntriesByShopHandlerTests()
     {
         _repoMock = new Mock<IRepository<CreditEntry>>();
-        _handler = new GetCreditEntriesByShopHandler(_repoMock.Object);
+        var currentUser = new Mock<ICurrentUserService>();
+        currentUser.SetupGet(x => x.UserId).Returns("shopId");
+        _handler = new GetCreditEntriesByShopHandler(_repoMock.Object, currentUser.Object);
     }
 
     [Fact]

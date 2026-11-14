@@ -1,5 +1,6 @@
 using CreditTracker.Application.CreditEntries.Commands.UpdateCreditEntry;
 using CreditTracker.Application.Data;
+using CreditTracker.Application.Commons;
 using CreditTracker.Application.Exception;
 using CreditTracker.Domain.Models;
 using FluentAssertions;
@@ -17,7 +18,9 @@ public class UpdateCreditEntryHandlerTests
     {
         _repoMock = new Mock<IRepository<CreditEntry>>();
         _unitOfWorkMock = new Mock<IUnitOfWork>();
-        _handler = new UpdateCreditEntryHandler(_repoMock.Object, _unitOfWorkMock.Object);
+        var currentUser = new Mock<ICurrentUserService>();
+        currentUser.SetupGet(x => x.UserId).Returns("shopId");
+        _handler = new UpdateCreditEntryHandler(_repoMock.Object, _unitOfWorkMock.Object, currentUser.Object);
     }
 
     [Fact]

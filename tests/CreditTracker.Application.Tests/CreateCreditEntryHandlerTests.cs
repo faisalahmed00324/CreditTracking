@@ -1,5 +1,6 @@
 using CreditTracker.Application.CreditEntries.Commands.CreateCreditEntry;
 using CreditTracker.Application.Data;
+using CreditTracker.Application.Commons;
 using CreditTracker.Domain.Models;
 using CreditTracker.Domain.Enum;
 using CreditTracker.Application.Exception;
@@ -21,7 +22,9 @@ public class CreateCreditEntryHandlerTests
         _creditEntryRepoMock = new Mock<IRepository<CreditEntry>>();
         _userRepoMock = new Mock<IRepository<User>>();
         _unitOfWorkMock = new Mock<IUnitOfWork>();
-        _handler = new CreateCreditEntryHandler(_creditEntryRepoMock.Object, _userRepoMock.Object, _unitOfWorkMock.Object);
+        var currentUser = new Mock<ICurrentUserService>();
+        currentUser.SetupGet(x => x.UserId).Returns("shopId");
+        _handler = new CreateCreditEntryHandler(_creditEntryRepoMock.Object, _userRepoMock.Object, _unitOfWorkMock.Object, currentUser.Object);
     }
 
     [Fact]
@@ -70,7 +73,7 @@ public class CreateCreditEntryHandlerTests
             .ReturnsAsync(customer)
             .ReturnsAsync((User?)null);
 
-        var command = new CreateCreditEntryCommand("nonexistent", "custId", "Widget", 50.0m, DateTime.UtcNow, false, null);
+        var command = new CreateCreditEntryCommand("shopId", "custId", "Widget", 50.0m, DateTime.UtcNow, false, null);
 
         // Act & Assert
         await FluentActions.Invoking(() => _handler.Handle(command, CancellationToken.None))

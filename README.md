@@ -74,7 +74,9 @@ CreditTracker
 │   └── ui-components.md
 │
 └── tests
-    └── CreditTracker.Application.Tests
+    ├── CreditTracker.Application.Tests
+    ├── CreditTracker.Api.Tests
+    └── coverage.runsettings
 ```
 
 ### Request flow
@@ -155,9 +157,39 @@ Check the frontend API base URL and Vite proxy configuration against the backend
 
 ### Backend tests
 
+Run the complete backend suite with **Docker running in Linux-container mode**:
+
 ```bash
 dotnet test CreditTracker.sln
 ```
+
+The integration tests automatically start a disposable `mongo:8.0` container and use
+randomly named test databases. They do not read application database credentials or
+connect to your development database. The first run requires internet access to
+download the container image. A missing Docker engine fails the integration suite;
+the tests are not silently skipped.
+
+The suite includes handler/domain/validator tests, real HTTP requests through the
+production startup pipeline, signed JWT authentication, role and credit-entry
+ownership checks, registration/OTP/login flows, and MongoDB repository/index/mapping tests.
+
+For a database-independent run without Docker:
+
+```bash
+dotnet test CreditTracker.sln --filter "Category!=Integration"
+```
+
+To collect line and branch coverage:
+
+```bash
+dotnet test CreditTracker.sln --collect:"XPlat Code Coverage" --settings tests/coverage.runsettings --results-directory TestResults
+```
+
+Cobertura XML reports are written under `TestResults/`. Backend CI runs the complete
+suite, merges coverage into a job summary, and uploads TRX test results plus a
+`backend-coverage` artifact containing HTML and XML coverage reports. Coverage is
+reported, not treated as proof that every scenario is covered; no arbitrary coverage
+threshold is enforced yet.
 
 ### Frontend tests
 

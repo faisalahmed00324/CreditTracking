@@ -1,5 +1,6 @@
 using CreditTracker.Application.CreditEntries.Query.GetCreditEntry;
 using CreditTracker.Application.Data;
+using CreditTracker.Application.Commons;
 using CreditTracker.Application.Exception;
 using CreditTracker.Domain.Models;
 using FluentAssertions;
@@ -15,7 +16,9 @@ public class GetCreditEntryHandlerTests
     public GetCreditEntryHandlerTests()
     {
         _repoMock = new Mock<IRepository<CreditEntry>>();
-        _handler = new GetCreditEntryHandler(_repoMock.Object);
+        var currentUser = new Mock<ICurrentUserService>();
+        currentUser.SetupGet(x => x.UserId).Returns("shopId");
+        _handler = new GetCreditEntryHandler(_repoMock.Object, currentUser.Object);
     }
 
     [Fact]

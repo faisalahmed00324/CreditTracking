@@ -17,6 +17,12 @@ public class CustomExceptionHandler
 
         (string Detail, string Title, int StatusCode) details = exception switch
         {
+            ForbiddenException =>
+            (
+                exception.Message,
+                exception.GetType().Name,
+                context.Response.StatusCode = StatusCodes.Status403Forbidden
+            ),
             InternalServerException =>
             (
                 exception.Message,

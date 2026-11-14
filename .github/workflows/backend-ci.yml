@@ -38,7 +38,20 @@ jobs:
         run: dotnet build CreditTracker.sln --configuration Release --no-restore
 
       - name: Run tests
-        run: dotnet test CreditTracker.sln --configuration Release --no-build --no-restore --logger trx --results-directory TestResults
+        run: >-
+          dotnet test CreditTracker.sln --configuration Release --no-build --no-restore
+          --logger trx --results-directory TestResults
+          --collect:"XPlat Code Coverage" --settings tests/coverage.runsettings
+
+      - name: Generate coverage summary
+        if: always() && hashFiles('TestResults/**/coverage.cobertura.xml') != ''
+        run: |
+          dotnet tool install dotnet-reportgenerator-globaltool --version 5.6.0 --tool-path "$RUNNER_TEMP/reportgenerator"
+          "$RUNNER_TEMP/reportgenerator/reportgenerator" \
+            "-reports:TestResults/**/coverage.cobertura.xml" \
+            "-targetdir:TestResults/coverage" \
+            "-reporttypes:Html;Cobertura;MarkdownSummaryGithub"
+          cat TestResults/coverage/SummaryGithub.md >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload test results
         if: always()
@@ -46,5 +59,16 @@ jobs:
         with:
           name: backend-test-results
           path: TestResults/**/*.trx
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Upload coverage reports
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: backend-coverage
+          path: |
+            TestResults/**/coverage.cobertura.xml
+            TestResults/coverage/
           if-no-files-found: ignore
           retention-days: 7

@@ -1,7 +1,6 @@
 ﻿using BuildingBlocks.Exceptions.Handler;
 using Carter;
 using CreditTracker.Application.Commons;
-using HealthChecks.MongoDb;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -24,9 +23,9 @@ namespace CreditTracker.Api
             var connectionString = configuration.GetSection("Database:Connection").Value!;
             var databaseName = configuration.GetSection("Database:Name").Value!;
             services.AddExceptionHandler<CustomExceptionHandler>();
-            services.AddSingleton(new MongoDbHealthCheck(new MongoClient(connectionString), databaseName));
+            services.AddSingleton<IMongoClient>(_ => new MongoClient(connectionString));
             services.AddHealthChecks()
-                .AddMongoDb();
+                .AddMongoDb(databaseNameFactory: _ => databaseName);
           
             services.AddEndpointsApiExplorer();
             services.AddCors(options =>
